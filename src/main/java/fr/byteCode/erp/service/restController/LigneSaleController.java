@@ -1,11 +1,13 @@
 package fr.byteCode.erp.service.restController;
 
 import fr.byteCode.erp.persistance.dto.LigneSaleDto;
+import fr.byteCode.erp.persistance.entities.LigneSale;
 import fr.byteCode.erp.service.services.InterfaceService.ILigneSalesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,6 +30,18 @@ public class LigneSaleController {
     @GetMapping(value = "/{id}")
     public LigneSaleDto getProduct(@PathVariable Long id) {
         return ligneSalesService.findById(id);
+    }
+    @GetMapping(value = "/lines/{id}")
+    public LigneSaleDto getLinesBySalesId(@PathVariable Long id) {
+        List<LigneSaleDto> ligneSales=new ArrayList<>();
+        ligneSales=ligneSalesService.findAllLigneSale();
+        List<LigneSaleDto> ligneSalesResult=new ArrayList<>();
+        ligneSales.forEach((d)->{
+            if(d.getSalesOrderId()==id){
+                ligneSalesResult.add(d);
+            }
+        });
+        return ligneSalesResult.get(0);
     }
 
     @PostMapping()

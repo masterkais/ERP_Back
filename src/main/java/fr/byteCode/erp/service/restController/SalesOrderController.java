@@ -13,16 +13,13 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/api/salesorder")
 public class SalesOrderController {
-
-
     private final ISalesOrderService salesOrderService;
-
     @Autowired
     public SalesOrderController(ISalesOrderService salesOrderService) {
         this.salesOrderService = salesOrderService;
     }
 
-    @GetMapping(value = "")
+    @GetMapping(value = "/sales")
     public List<SalesOrderDto> findAll() {
         return salesOrderService.findAllSalesOrder();
     }
