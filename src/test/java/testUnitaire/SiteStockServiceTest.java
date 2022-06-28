@@ -55,7 +55,7 @@ public class SiteStockServiceTest {
     }
 
     @Test
-    @DisplayName("test for update")
+    @DisplayName("test for update siteStock")
     public void updateSiteStockTest() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         when(siteStockDao.findOne(anyLong())).thenReturn(siteStock);
         when(siteStockDao.saveAndFlush(siteStock)).thenReturn(siteStock);
