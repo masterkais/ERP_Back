@@ -82,7 +82,7 @@ public class SiteStockServiceTest {
         verify(siteStockDao, times(1)).findAll();
     }
 
-    @DisplayName("test for delete by id")
+    @DisplayName("test for delete by id siteStock")
     @Test
     public void testDeleteSieStock() {
         UUID uuid = UUID.randomUUID();
