@@ -50,8 +50,6 @@ public class CategoryServiceTest {
         category.setProductList(null);
         categoryDto = new CategoryDto(ONE, "categoryName", "description",brand.getId());
         categoryDto.setProductListIds(null);
-
-
     }
 
     @AfterEach
