@@ -16,14 +16,12 @@ import java.util.List;
 import java.util.UUID;
 
 import static fr.byteCode.erp.persistance.constants.LongConstants.ONE;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
 public class SiteStockServiceTest {
     @InjectMocks
     private SiteStockService siteStockService;
-
     @Mock
     private SiteStockDao siteStockDao;
     private SiteStock siteStock;
@@ -33,8 +31,8 @@ public class SiteStockServiceTest {
     @BeforeEach
     void setup() throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         MockitoAnnotations.initMocks(this);
-        siteStockDto=new SiteStockDto(ONE,"name","description", "adress", true);
-        siteStock=new SiteStock(ONE,"name","description", "adress", true);
+        siteStockDto = new SiteStockDto(ONE, "name", "description", "adress", true);
+        siteStock = new SiteStock(ONE, "name", "description", "adress", true);
 
         siteStockList = new ArrayList<SiteStock>();
         siteStockList.add(siteStock);
@@ -48,7 +46,7 @@ public class SiteStockServiceTest {
     }
 
     @Test
-    @DisplayName("test for save")
+    @DisplayName("test for save siteStock")
     public void saveProductTest() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         when(siteStockDao.saveAndFlush(siteStock)).thenReturn(siteStock);
         SiteStockDto siteSockDtoSaved = siteStockService.save(siteStockDto);
@@ -64,7 +62,7 @@ public class SiteStockServiceTest {
         SiteStockDto siteStockDtoResult = siteStockService.findById(siteStock.getId());
         SiteStockDto siteStockDtoSaved = siteStockService.save(siteStockDto);
         Assertions.assertEquals(siteStockDtoResult, siteStockDto);
-        Assertions.assertEquals(siteStockDtoSaved,siteStockDto);
+        Assertions.assertEquals(siteStockDtoSaved, siteStockDto);
         Assertions.assertDoesNotThrow(() -> siteStockService.findById(siteStock.getId()));
         verify(siteStockDao, times(2)).findOne(siteStock.getId());
         verify(siteStockDao, times(1)).saveAndFlush(siteStock);
