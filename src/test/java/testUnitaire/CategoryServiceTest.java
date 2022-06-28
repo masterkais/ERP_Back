@@ -62,7 +62,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    @DisplayName("test for save")
+    @DisplayName("test for save category")
     public void saveCategoryTest() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         when(categoryDao.findByName(category.getName())).thenReturn(null);
         when(brandDao.findOne(anyLong())).thenReturn(brand);
@@ -75,7 +75,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    @DisplayName("test for update")
+    @DisplayName("test for update category")
     public void updateCategoryTest() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         when(categoryDao.findByName(category.getName())).thenReturn(null);
         when(brandDao.findOne(anyLong())).thenReturn(brand);
