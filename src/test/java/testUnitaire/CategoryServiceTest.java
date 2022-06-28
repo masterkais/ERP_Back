@@ -100,7 +100,7 @@ public class CategoryServiceTest {
         verify(categoryDao, times(1)).findAll();
     }
 
-    @DisplayName("test for delete by id")
+    @DisplayName("test for delete by id category")
     @Test
     public void testDeleteCategory() {
         UUID uuid = UUID.randomUUID();
