@@ -70,7 +70,7 @@ public class SiteStockServiceTest {
 
     }
 
-    @DisplayName("test for get all product")
+    @DisplayName("test for get all product by sitestock")
     @Test
     public void allSiteStockTest() {
         //GIVEN
