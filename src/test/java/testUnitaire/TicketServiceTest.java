@@ -40,7 +40,6 @@ public class TicketServiceTest {
 
     @BeforeEach
     void setup() throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
-        System.out.println("*****");
         MockitoAnnotations.openMocks(this);
         ticket = new Ticket(ONE, "title", "author", "details", daeNess, daeNess, "status", false, null, EntitiesContants.INVENTORY_MANAGER);
         ticketDto = TicketConverter.modelToDto(ticket);
