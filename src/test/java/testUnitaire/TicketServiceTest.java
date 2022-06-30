@@ -60,7 +60,6 @@ public class TicketServiceTest {
     @Test
     @DisplayName("test for save")
     public void saveTicketTest() {
-        System.out.println("test success");
         Mockito.when(ticketDao.saveAndFlush(ticket)).thenReturn(ticket);
         TicketDto ticketResult = ticketService.save(ticketDto);
         assertEquals(ticketResult, ticketDto);
