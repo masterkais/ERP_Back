@@ -63,4 +63,5 @@ public class ProductController {
     public List<ProductDto> findAllByCategoryIdAndSieStockId(@PathVariable Long categoryId,@PathVariable Long siteStockId) {
         return productService.findAllSProductsByCategoyAndSiteStock(categoryId,siteStockId);
     }
+
 }

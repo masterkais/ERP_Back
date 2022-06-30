@@ -40,7 +40,6 @@ public class BrandService extends GenericService<Brand,Long> implements IBrandSe
     public BrandDto update(BrandDto brandDto) {
         Objects.requireNonNull(brandDto);
         checkBrandExistById(brandDto.getId());
-        checkValidName(brandDto.getName());
         Brand  brandSaved= brandDao.saveAndFlush(BrandConverter.dtoToModel(brandDto));
         log.info(LOG_ENTITY_UPDATED, brandSaved);
         return BrandConverter.ModelToDto(brandSaved);

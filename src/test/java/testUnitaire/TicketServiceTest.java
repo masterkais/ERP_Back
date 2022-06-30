@@ -6,7 +6,10 @@ import fr.byteCode.erp.persistance.dto.TicketDto;
 import fr.byteCode.erp.persistance.entities.Ticket;
 import fr.byteCode.erp.service.convertor.TicketConverter;
 import fr.byteCode.erp.service.services.ImplService.TicketService;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -35,48 +38,51 @@ public class TicketServiceTest {
     private List<Ticket> ticketList;
     private List<TicketDto> ticketDtos;
 
-
-
     @BeforeEach
-    void setup() throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException{
+    void setup() throws InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         MockitoAnnotations.openMocks(this);
-        ticket = new Ticket(ONE,"title","author","details",daeNess,daeNess,"status",false,null,EntitiesContants.INVENTORY_MANAGER);
-    ticketDto= TicketConverter.modelToDto(ticket);
-    ticketList=new ArrayList<>();
-    ticketDtos=new ArrayList<>();
-    ticketList.add(ticket);
-    ticketDtos.add(ticketDto);
+        ticket = new Ticket(ONE, "title", "author", "details", daeNess, daeNess, "status", false, null, EntitiesContants.INVENTORY_MANAGER);
+        ticketDto = TicketConverter.modelToDto(ticket);
+        ticketList = new ArrayList<>();
+        ticketDtos = new ArrayList<>();
+        ticketList.add(ticket);
+        ticketDtos.add(ticketDto);
 
     }
+
     @AfterEach
-    void tearDown(){
-        ticketDtos= null;
-        ticket=null;
-        ticketDto=null;
+    void tearDown() {
+        ticketDtos = null;
+        ticket = null;
+        ticketDto = null;
     }
+
     @Test
     @DisplayName("test for save")
-    public void saveTicketTest(){
+    public void saveTicketTest() {
+        System.out.println("test success");
         Mockito.when(ticketDao.saveAndFlush(ticket)).thenReturn(ticket);
-        TicketDto ticketResult=ticketService.save(ticketDto);
-        assertEquals(ticketResult,ticketDto);
-        Mockito.verify(ticketDao,Mockito.times(1)).saveAndFlush(ticket);
+        TicketDto ticketResult = ticketService.save(ticketDto);
+        assertEquals(ticketResult, ticketDto);
+        Mockito.verify(ticketDao, Mockito.times(1)).saveAndFlush(ticket);
 
     }
+
     @Test
     @DisplayName("test for update")
-    public void updateTicketTest()throws InvocationTargetException, IllegalAccessException, NoSuchMethodException{
+    public void updateTicketTest() throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         Mockito.when(ticketDao.findOne(ArgumentMatchers.anyLong())).thenReturn(ticket);
         Mockito.when(ticketDao.saveAndFlush(ticket)).thenReturn(ticket);
         TicketDto ticketDtoResult = ticketService.findById(ticket.getId());
         TicketDto ticketDtoSaved = ticketService.save(ticketDto);
-        assertEquals(ticketDtoResult,ticketDto);
-        assertEquals(ticketDtoSaved,ticketDto);
+        assertEquals(ticketDtoResult, ticketDto);
+        assertEquals(ticketDtoSaved, ticketDto);
         assertDoesNotThrow(() -> ticketService.findById(ticket.getId()));
         verify(ticketDao, times(2)).findOne(ticket.getId());
         verify(ticketDao, times(1)).saveAndFlush(ticket);
     }
-    @DisplayName("test for get all product")
+
+    @DisplayName("test for get all tickets")
     @Test
     public void allTicketTest() {
         //GIVEN
@@ -87,6 +93,7 @@ public class TicketServiceTest {
         assertNotNull(results);
         verify(ticketDao, times(1)).findAll();
     }
+
     @DisplayName("test for delete by id")
     @Test
     public void testDeleteTicket() {
